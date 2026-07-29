@@ -1,0 +1,11 @@
+response,method,power
+null,Summary Statistic,0
+null,Linear Mixed Model,0.152
+immediate,Summary Statistic,0.022
+immediate,Linear Mixed Model,0.982
+delayed,Summary Statistic,0
+delayed,Linear Mixed Model,0.148
+habituation,Summary Statistic,0
+habituation,Linear Mixed Model,0.214
+sustained,Summary Statistic,0
+sustained,Linear Mixed Model,0.38
