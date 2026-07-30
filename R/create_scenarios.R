@@ -1,4 +1,8 @@
-# Create all simulation scenarios
+#' Create simulation scenarios
+#'
+#' Generates combinations of simulation settings.
+#'
+#' @export
 
 create_scenarios <- function() {
   

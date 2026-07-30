@@ -1,0 +1,24 @@
+Package: physioSim
+Type: Package
+Title: Simulation Framework for Physiological Time-Series Data
+Version: 0.1.0
+Authors@R:
+    person(
+        "Jenna",
+        "Lu",
+        email = "jennahlu3@gmail.com",
+        role = c("aut","cre")
+    )
+Description: An open-source framework for generating realistic physiological
+    time-series data and benchmarking statistical methods for repeated-
+    measures experiments.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Imports:
+    tidyverse,
+    lme4,
+    lmerTest,
+    mgcv
+Roxygen: list(markdown = TRUE)
+Config/roxygen2/version: 8.0.0

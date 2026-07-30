@@ -1,6 +1,16 @@
-# Simulate a complete heart-rate experiment
-#
-# Generates repeated heart-rate measurements for multiple participants.
+#' Simulate a physiological dataset
+#'
+#' Generates repeated physiological trajectories for multiple participants.
+#'
+#' @param n_subjects Number of participants.
+#' @param response Response profile.
+#' @param amplitude Effect size.
+#' @param seed Random seed.
+#'
+#' @return A simulated dataset.
+#'
+#' @export
+
 
 simulate_dataset <- function(
     n_subjects,

@@ -1,7 +1,16 @@
-# Generate physiological response curves
-#
-# Generates the expected heart-rate response over time for a given
-# response type.
+#' Generate Physiological Response Curves
+#'
+#' Simulates physiological response trajectories representing
+#' common experimental response patterns.
+#'
+#' @param time Numeric vector of time points.
+#' @param response Character string specifying response type.
+#' @param amplitude Peak response magnitude.
+#' @param peak_time Time of peak response.
+#'
+#' @return Numeric vector of simulated response values.
+#'
+#' @export
 
 generate_response_curve <- function(
     time,

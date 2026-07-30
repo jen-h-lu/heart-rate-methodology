@@ -1,5 +1,8 @@
-# Default simulation parameters for physioSim
-
+#' Default simulation parameters
+#'
+#' Returns package defaults.
+#'
+#' @export
 default_parameters <- list(
   
   # Population

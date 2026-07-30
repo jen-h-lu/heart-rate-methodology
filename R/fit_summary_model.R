@@ -1,3 +1,10 @@
+#' Fit summary-statistic model
+#'
+#' @param data Dataset.
+#'
+#' @return P-value.
+#'
+#' @export
 fit_summary_model <- function(data){
   
   

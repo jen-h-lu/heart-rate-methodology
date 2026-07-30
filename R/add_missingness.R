@@ -1,4 +1,13 @@
-# Randomly remove physiological observations
+#' Add missing observations
+#'
+#' Simulates missing physiological measurements.
+#'
+#' @param data Dataset.
+#' @param proportion Missing proportion.
+#'
+#' @return Dataset with missing values.
+#'
+#' @export
 
 add_missingness <- function(
     data,

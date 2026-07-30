@@ -1,7 +1,8 @@
-# Generate autoregressive AR(1) noise
-#
-# epsilon_t = rho * epsilon_(t-1) + eta_t
-
+#' Generate autoregressive noise
+#'
+#' Simulates AR(1) errors.
+#'
+#' @export
 
 generate_ar_noise <- function(
     n,

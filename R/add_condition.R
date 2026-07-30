@@ -1,3 +1,13 @@
+#' Add experimental condition labels
+#'
+#' Adds baseline and cue conditions.
+#'
+#' @param data Simulated dataset.
+#'
+#' @return Updated dataset.
+#'
+#' @export
+
 add_condition <- function(data){
   
   data$condition <- ifelse(

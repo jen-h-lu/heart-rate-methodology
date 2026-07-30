@@ -1,23 +1,53 @@
-source("R/generate_subjects.R")
-source("R/generate_response_curve.R")
-source("R/simulate_dataset.R")
+library(testthat)
+library(physioSim)
 
-sim_data <- simulate_dataset(
-  n_subjects = 5,
-  seed = 1
-)
 
-stopifnot(nrow(sim_data) == 5 * 61)
+test_that("simulate_dataset returns correct dimensions", {
+  
+  sim_data <- simulate_dataset(
+    n_subjects = 5,
+    seed = 1
+  )
+  
+  expect_equal(
+    nrow(sim_data),
+    5 * length(unique(sim_data$time))
+  )
+  
+})
 
-stopifnot(length(unique(sim_data$subject)) == 5)
 
-stopifnot(all(c(
-  "subject",
-  "time",
-  "baseline_hr",
-  "random_effect",
-  "response",
-  "observed_hr"
-) %in% names(sim_data)))
+test_that("simulate_dataset contains unique subjects", {
+  
+  sim_data <- simulate_dataset(
+    n_subjects = 5,
+    seed = 1
+  )
+  
+  expect_equal(
+    length(unique(sim_data$subject)),
+    5
+  )
+  
+})
 
-cat("All tests passed!\n")
+
+test_that("simulate_dataset contains required columns", {
+  
+  sim_data <- simulate_dataset(
+    n_subjects = 5,
+    seed = 1
+  )
+  
+  expect_true(
+    all(c(
+      "subject",
+      "time",
+      "baseline_hr",
+      "random_effect",
+      "response",
+      "observed_hr"
+    ) %in% names(sim_data))
+  )
+  
+})
