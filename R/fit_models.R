@@ -1,30 +1,34 @@
-#' Fit linear mixed model
+#' Fit Linear Mixed Effects Model
 #'
-#' Fits an LMM to simulated data.
+#' Fits a linear mixed-effects model to simulated physiological
+#' time-series data.
 #'
-#' @param data Dataset.
+#' @param data A data frame containing simulated physiological measurements.
 #'
-#' @return Model statistics.
+#' @return A model summary containing estimated effects and statistical tests.
+#'
+#' @importFrom lmerTest lmer
 #'
 #' @export
-library(lme4)
-library(lmerTest)
+#'
+#' @examples
+#' \dontrun{
+#' data <- simulate_dataset(
+#'   n_subjects = 20,
+#'   response = "immediate"
+#' )
+#'
+#' data <- add_condition(data)
+#'
+#' fit_lmm(data)
+#' }
 
 
 fit_lmm <- function(data){
   
-  model <- lmer(
-    observed_hr ~ condition + time +
-      (1 | subject),
+  lme4::lmer(
+    observed_hr ~ condition * time + (1 | subject),
     data = data
-  )
-  
-  
-  results <- summary(model)$coefficients
-  
-  
-  return(
-    results["condition",]
   )
   
 }

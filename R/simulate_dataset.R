@@ -30,7 +30,7 @@ simulate_dataset <- function(
     0,
     120,
     by = 10
-  )
+  )[1:12]
   
   
   # Generate participant characteristics
@@ -54,10 +54,21 @@ simulate_dataset <- function(
     
     function(i) {
       
-      
       baseline <- subjects$baseline_hr[i]
       
       random_effect <- subjects$random_effect[i]
+      
+      
+      condition <- ifelse(
+        time < 60,
+        "control",
+        "treatment"
+      )
+      
+      condition <- rep(
+        c("control", "treatment"),
+        each = length(time)/2
+      )
       
       
       tibble::tibble(
@@ -66,6 +77,8 @@ simulate_dataset <- function(
         
         time = time,
         
+        condition = condition,
+        
         baseline_hr = baseline,
         
         random_effect = random_effect,
@@ -73,13 +86,18 @@ simulate_dataset <- function(
         response = response_curve,
         
         
-        observed_hr = baseline_hr +
+        observed_hr =
+          baseline +
           random_effect +
-          response_curve +
+          ifelse(
+            condition == "treatment",
+            response_curve,
+            0
+          ) +
           generate_ar_noise(
             length(time),
-            rho=rho,
-            sigma=4
+            rho = rho,
+            sigma = 4
           )
         
       )
