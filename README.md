@@ -1,171 +1,153 @@
 # physioSim
 
-**An open-source simulation framework for benchmarking statistical methods for physiological time-series data.**
+**physioSim** is an open-source R framework for simulating repeated-measures physiological time-series data and benchmarking statistical methods under controlled experimental conditions.
 
----
-
-## Overview
-
-physioSim is an R-based simulation framework for generating realistic physiological time-series data and evaluating statistical methods under controlled experimental conditions.
-
-The project was developed to investigate how statistical modeling choices influence inference for repeated-measures physiological signals such as heart rate.
-
-Unlike generic longitudinal simulation frameworks, physioSim focuses on realistic physiological response dynamics including delayed responses, habituation, sustained activation, temporal dependence, participant heterogeneity, measurement noise, and missing observations.
-
----
-
-## Research Motivation
-
-Physiological experiments frequently collect hundreds of repeated observations from each participant.
-
-Despite this rich temporal information, many analyses reduce these measurements to summary statistics such as:
-
-- Mean response
-- Maximum response
-- Area under the curve (AUC)
-
-While computationally convenient, these summaries may discard meaningful temporal information.
-
-physioSim provides a reproducible environment for investigating when summary-based approaches remain appropriate and when trajectory-based statistical methods provide improved inference.
-
----
-
-## Research Questions
-
-This project investigates:
-
-- How does sample size influence statistical power?
-- How does temporal autocorrelation affect inference?
-- How does missing data influence statistical performance?
-- When do trajectory-based methods outperform summary statistics?
-- Which statistical methods are most robust across realistic physiological response patterns?
+The framework was developed to investigate how characteristics of physiological signals—such as temporal autocorrelation, participant-level heterogeneity, measurement noise, and missing observations—influence statistical inference for repeated-measures analyses.
 
 ---
 
 ## Features
 
-Current functionality includes:
+* Simulates physiologically plausible response trajectories
+* Supports multiple temporal response patterns:
 
-- Participant-level simulation
-- Multiple physiological response profiles
-- Subject-specific random effects
-- Temporal dependence
-- Measurement noise
-- Missing-data simulation
-- Linear mixed-effects model benchmarking
-- Summary statistic benchmarking
-- Reproducible simulation workflows
+  * Null response
+  * Immediate activation
+  * Delayed activation
+  * Habituation
+  * Sustained activation
+* Incorporates participant-specific random effects
+* Models temporal dependence using AR(1) processes
+* Simulates missing observations
+* Provides benchmarking workflows for linear mixed-effects models and related statistical approaches
 
 ---
 
-## Repository Structure
+## Repository structure
 
-```text
-R/
-Reusable simulation and analysis functions
-
-simulations/
-Reproducible simulation experiments
-
-results/
-Simulation outputs
-
-figures/
-Publication-quality figures
-
-docs/
-Manuscript and documentation
-
-tests/
-Validation scripts
+```
+physioSim/
+├── R/                  # Core simulation functions
+├── analysis/           # Reproducible analysis scripts
+├── simulations/        # Simulation study workflows
+├── figures/            # Figures used in the manuscript
+├── man/                # Function documentation
+├── tests/              # Package tests
+├── DESCRIPTION
+├── NAMESPACE
+└── README.md
 ```
 
 ---
 
-## Current Figures
+## Installation
 
-The repository currently includes:
+Clone the repository:
 
-- Figure 1 – Simulated physiological response profiles
-- Figure 2 – Statistical power versus sample size
-- Figure 3 – Type I error under temporal autocorrelation
-- Figure 4 – Effect of missing data on statistical power
-- Figure 5 – Comparison of summary statistics and linear mixed-effects models
+```bash
+git clone https://github.com/jen-h-lu/physioSim.git
+cd physioSim
+```
 
----
+Install required R packages:
 
-## Software
-
-Language:
-
-- R
-
-Primary packages:
-
-- tidyverse
-- lme4
-- lmerTest
-- ggplot2
+```r
+install.packages(c("tidyverse", "lme4", "broom.mixed"))
+```
 
 ---
 
-## Project Status
+## Quick start
 
-Current stage:
+Generate a simulated physiological dataset:
 
-**Simulation framework complete**
+```r
+source("R/simulate_dataset.R")
 
-Completed:
+data <- simulate_dataset(
+  n_subjects = 40,
+  response = "immediate",
+  amplitude = 3,
+  rho = 0.6,
+  seed = 123
+)
 
-- Simulation engine
-- Benchmarking framework
-- Initial validation experiments
-- Five manuscript figures
+head(data)
+```
 
-In progress:
+Fit a linear mixed-effects model:
 
-- Generalized additive mixed models (GAMM)
-- Functional data analysis
-- Bayesian hierarchical modeling
+```r
+library(lme4)
+
+model <- lmer(
+  observed_hr ~ condition + time + (1 | subject),
+  data = data
+)
+
+summary(model)
+```
 
 ---
 
-## Reproducibility
+## Example output
 
-All simulation experiments are fully reproducible.
+### Simulated physiological trajectories
 
-Each figure can be regenerated directly from the scripts contained in the `simulations/` directory.
+<img src="figures/figure1_response_profiles.png" width="700">
+
+### Statistical power across sample sizes
+
+<img src="figures/figure2_power_curve.png" width="700">
+
+### Type I error under increasing temporal autocorrelation
+
+<img src="figures/figure3_type1_autocorrelation.png" width="700">
 
 ---
 
-## Future Development
+## Reproducing the manuscript analyses
 
-Planned additions include:
+The analyses used in the accompanying manuscript can be reproduced by running the scripts in the `analysis/` and `simulations/` directories. A typical workflow is:
 
-- Generalized additive mixed models
-- Functional data analysis
-- Bayesian hierarchical models
-- R package development
-- Expanded physiological modalities
+```r
+source("analysis/01_generate_dataset.R")
+source("analysis/02_effect_size.R")
+source("simulations/06_method_benchmark.R")
+```
+
+---
+
+## Associated manuscript
+
+This repository accompanies the manuscript:
+
+> **Lu, J.** *physioSim: An Open Simulation Framework for Benchmarking Statistical Methods for Physiological Time-Series Data.*
 
 ---
 
 ## Citation
 
-If you use or build upon physioSim, please cite this repository and the accompanying manuscript (forthcoming).
-
----
-
-## Author
-
-Jenna Lu
-
-University of Florida
-
-Department of Statistics
+If you use **physioSim** in research or teaching, please cite the repository and associated manuscript. GitHub provides a formatted citation automatically through the **“Cite this repository”** feature.
 
 ---
 
 ## License
 
-MIT License
+This project is released under the **MIT License**.
+
+---
+
+## Future directions
+
+Planned extensions include:
+
+* Additional physiological modalities (EDA, EEG, respiration)
+* More complex missing-data mechanisms
+* Alternative temporal dependence structures
+* Generalized additive models and functional data analysis benchmarking
+* Bayesian hierarchical modeling workflows
+
+---
+
+Developed by **Jenna Lu** at the **University of Florida**.
