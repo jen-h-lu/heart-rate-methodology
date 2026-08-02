@@ -1,9 +1,10 @@
 cff-version: 1.2.0
-title: "physioSim: An Open Simulation Framework for Benchmarking Statistical Methods for Physiological Time-Series Data"
+title: physioSim
+message: "If you use this software, please cite the repository and associated manuscript."
+type: software
 authors:
-  - family-names: "Lu"
-    given-names: "Jenna"
-version: "1.0.0"
-date-released: "2026-07-31"
-license: "MIT"
+  - family-names: Lu
+    given-names: Jenna
 repository-code: "https://github.com/jen-h-lu/physioSim"
+license: MIT
+version: 1.0.0
