@@ -15,7 +15,7 @@
 generate_response_curve <- function(
     time,
     response = "null",
-    amplitude = 12,
+    amplitude = 3,
     peak_time = 60
 ) {
   
@@ -25,8 +25,11 @@ generate_response_curve <- function(
     
   } else if (response == "immediate") {
     
-    curve <- amplitude *
-      exp(-(time - peak_time)^2 / (2 * 20^2))
+    curve <- ifelse(
+      time >= 10,
+      amplitude,
+      0
+    )
     
   } else if (response == "delayed") {
     
